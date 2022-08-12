@@ -163,9 +163,9 @@ function UI() constructor {
 		/// @func menu_item(_label, _id, _on_click)
 		/// @param {String} _label This if the menu text
 		/// @param {String} _id The id of the button. Needs to be unique
-		/// @param {String} _shortcut Short cut key
 		/// @param {Function} _on_click This is what you want to happen when they click it
-		static menu_item = function(_label, _id, _shortcut, _on_click) {
+		/// @param {String} _shortcut Short cut key
+		static menu_item = function(_label, _id, _on_click, _shortcut = "") {
 			if(imguigml_menu_item(string(_label) + "###" + string(_id), _shortcut)) {
 				_on_click();
 			}
@@ -363,10 +363,10 @@ function UI() constructor {
 
 	#region CHECKBOX
 		/// @func checkbox(_label, _id, _value, _on_change)
-		/// @parameter {String} _label Title name of the window
-		/// @parameter {String} _id This is the ID. Needs to be unique
-		/// @parameter {String} _value default value
-		/// @parameter {Function} _on_change callback function
+		/// @param {String} _label Title name of the window
+		/// @param {String} _id This is the ID. Needs to be unique
+		/// @param {String} _value default value
+		/// @param {Function} _on_change callback function
 		static checkbox = function(_label, _id, _value, _on_change) {
 			var ret = imguigml_checkbox(string(_label) + "###" + string(_id), _value);
 
@@ -505,7 +505,9 @@ function UI() constructor {
 	#endregion
 	
 	#region Columns
-		//
+		/// @func columns(id, ... columns)
+		/// @param {String} id
+		/// @param {Function} call back for each column
 		static columns = function() {
 			var column_count = argument_count - 1;
 			imguigml_columns(column_count, argument[0]);
@@ -517,12 +519,31 @@ function UI() constructor {
 		}
 	#endregion
 
-	 #region Labels
+	#region Labels
 		/// @func label(_string)
 		/// @desc Place a static label
 		/// @param {String} _string The text to draw
-	    static label = function(_string) {
+		static label = function(_string) {
 			imguigml_text(_string);
-	    }
-	 #endregion
+		}
+	#endregion
+
+	#region Text
+		/// @func input_text(_label, _id, _text, _max_length, _on_change, [_callback = undefined], [_flags = 0], [_user_data = undefined])
+		/// @param {String} _label Title name of the window
+		/// @param {String} _id This is the ID. Needs to be UNIQUE
+		/// @param {Real} _max_length Maximum length of input characters
+		/// @param {Function} _on_change Function to call when changed
+		/// @param {Function} _callback No idea
+		/// @param {Any} _flags No idea
+		/// @param {Any} _user_data No idea
+		static input_text = function(_label, _id, _text, _max_length, _on_change, _callback = undefined, _flags = 0, _user_data = undefined) {
+			var ret = imguigml_input_text(string(_label) + "###" + string(_id), _text, _max_length, _flags, _callback, _user_data)
+			
+			if(ret[0] == true) {
+				_on_change(ret[1]);
+			}
+		}
+	#endregion
+	 
 }
