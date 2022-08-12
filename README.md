@@ -51,5 +51,46 @@ You can add either a main menu to your application, or a child menu into a windo
     }, EImGUI_Window.MenuBar);
 
 ### Windows
+A window can easily be created with a single line of code. The callback function will push anything inside of it into the window's container.
+
+    // simple window with a default width, height
+    ui.window("Test Window", "window_test_1", 300, 400, 200, 200, function() {
+      ui.label("This is a label");
+    });
+    
+    // simple window with no title bar and auto size
+    ui.window("Test Window", "window_test_2", 300, 100, 0, 0, function() {
+      ui.label("This is a label and this window will be able to grow and shrink with what is inside");
+      ui.label("I also have no title bar!");
+    }, EImGui_WindowFlags.NoTitleBar);
+    
+    // simple window with inputs
+    ui.window("Test", "window_test_3", 10, 100, 0, 0, function() {
+      ui.label("Hello World");
+      ui.separator();
+      
+      ui.slider_float("Scale", "scale_xy", [obj_Player.image_xscale, obj_Player.image_yscale, obj_Player.image_angle], 0, 1, function(_a, _b, _c) {
+        obj_Player.image_xscale = _a;
+        obj_Player.image_yscale = _b;
+        obj_Player.image_angle = _c * 100;
+      });
+    });
 
 ### Inputs
+
+Input command in the library are simple and intelligent. This means that for sliders and drag function calls you pass in an array of variables. The function will then figure out which slider/drag to call in the background.
+
+Because of the ability to pass in multiple variables into the function, the call back function will also recieve the amount of variables you passed in. This means if you passed in 3 variables, your callback function would have 3 arguments as well.
+
+    // single slider (float)
+    ui.slider_float("My Slider", "sld_xscale", [obj_Player.image_xscale], 0, 1, function(_a) {
+      obj_Player.image_xscale = _a;
+    });
+    
+    // four slider (float)
+    ui.slider_float("My Slider Four", "sld_four", [obj_Player.image_xscale, obj_Player.image_yscale, obj_Player.image_alpha, obj_Player.image_angle], 0, 1, function(_a, _b, _c, _d) {
+      obj_Player.image_xscale = _a;
+      obj_Player.image_yscale = _b;
+      obj_Player.image_alpha = _c;
+      obj_Player.image_angle = _d * 360;
+    });
