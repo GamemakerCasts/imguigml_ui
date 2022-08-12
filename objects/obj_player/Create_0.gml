@@ -1,13 +1,14 @@
 /// @description 
 
-_gravity = 1;
-_jump_height = -14;
-_acceleration = 1;
-_deceleration = 1;
-_max_speed_walk = 5;
-_max_speed_run = 8;
+// move to center of room
+x = room_width / 2;
+y = room_height / 2;
 
-movement_horizontal = 0;
-movement_vertical = 0;
+// some variables
+_is_selected = false;
+_window_x = 0;
+_window_y = 0;
 
-is_on_ground = false;
+// initialize the UI for our player
+ui = new UI();
+ui.init();

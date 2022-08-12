@@ -396,7 +396,7 @@ function UI() constructor {
 		/// @desc will return true/false if an imgui control is being hovered
 		/// @return Bool
 		static is_item_hovered = function() {
-			return imguigml_is_item_hovered();
+			return imguigml_is_any_item_hovered();
 		}
 
 		/// @func separator()
@@ -452,15 +452,15 @@ function UI() constructor {
 		/// @param {String} _id This is the ID. Needs to be UNIQUE
 		/// @param {Real} _x Position X
 		/// @param {Real} _y Position Y
-		/// @param {Real} _width Width of window
-		/// @param {Real} _height Height of window
+		/// @param {Real} _width Width of window. Use 0 for auto fit
+		/// @param {Real} _height Height of window. Use 0 for auto fit
 		/// @param {Function} _callback Function to run when open
 		/// @param _flags
 		static window  = function(_label, _id, _x, _y, _width, _height, _callback, _flags = EImGui_WindowFlags.NoCollapse + EImGui_WindowFlags.NoResize) {
 			imguigml_set_next_window_size(_width, _height);
 			imguigml_set_next_window_pos(_x, _y);
 		
-			var ret = imguigml_begin(string(_label) + "###" + string(_id), true, _flags);
+			var ret = imguigml_begin(string(_label) + "###" + string(_id), undefined, _flags);
 	
 			if(ret[0] == 1) {
 				_callback();
