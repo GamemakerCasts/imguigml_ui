@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "imguigml_ui",
+    "path": "folders/Plugins/imguigml_ui.yy",
   },
   "resourceVersion": "1.0",
   "name": "UI",

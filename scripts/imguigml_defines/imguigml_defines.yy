@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Scripts",
-    "path": "folders/ImGuiGML/Scripts.yy",
+    "path": "folders/Plugins/ImGuiGML/Scripts.yy",
   },
   "resourceVersion": "1.0",
   "name": "imguigml_defines",

@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "ImGuiGML",
-    "path": "folders/ImGuiGML.yy",
+    "path": "folders/Plugins/ImGuiGML.yy",
   },
   "resourceVersion": "1.0",
   "name": "imguigml_config",
