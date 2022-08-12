@@ -220,6 +220,16 @@ function UI() constructor {
 			}
 		}
 
+		/// @func drag_float(_label, _id, _values, _min, _max, _on_change, [_step = 0.5], [_format = "%.3f"], [_flags = EImGui_SliderFlags.None])
+		/// @param {String} _label This if the menu text
+		/// @param {String} _id The id of the drag. Needs to be unique
+		/// @param {Array} _values The default values to assign
+		/// @param {Real} _min Minimum value that can be achieved by dragging
+		/// @param {Real} _max Maximum value that can be achieved by dragging
+		/// @param {Function} _on_change The callback function when something changed
+		/// @param {Real} _step how much to increment in
+		/// @param {Real} _format the decimal format
+		/// @param {Real} _flags The flags to pass through
 		static drag_float = function(_label, _id, _values, _min, _max, _on_change, _step = 0.5, _format = "%.3f", _flags = EImGui_SliderFlags.None) {
 			var ret = [0,0];
 			var drag_length = array_length(_values);
@@ -368,10 +378,16 @@ function UI() constructor {
 
 	#region HELPERS
 	
+		/// @func gui_width()
+		/// @desc returns the gui width
+		/// @return Real
 		static gui_width = function() {
 			return display_get_gui_width();
 		}
 		
+		/// @func gui_height()
+		/// @desc returns the gui height
+		/// @return Real
 		static gui_height = function() {
 			return display_get_gui_height();
 		}
@@ -432,15 +448,15 @@ function UI() constructor {
 
 	#region WINDOW
 		/// @func window(_label, _width, _height, _x, _y, _callback, [_flags = EImGui_WindowFlags.NoCollapse + EImGui_WindowFlags.NoResize])
-		/// @param  {String} _label Title name of the window
-		/// @param  {String} _id This is the ID. Needs to be UNIQUE
-		/// @param  {Real} _width Width of window
-		/// @param  {Real} _height Height of window
-		/// @param  {Real} _x Position X
-		/// @param  {Real} _y Position Y
-		/// @param  {Function} _callback Function to run when open
+		/// @param {String} _label Title name of the window
+		/// @param {String} _id This is the ID. Needs to be UNIQUE
+		/// @param {Real} _x Position X
+		/// @param {Real} _y Position Y
+		/// @param {Real} _width Width of window
+		/// @param {Real} _height Height of window
+		/// @param {Function} _callback Function to run when open
 		/// @param _flags
-		static window  = function(_label, _id, _width, _height, _x, _y, _callback, _flags = EImGui_WindowFlags.NoCollapse + EImGui_WindowFlags.NoResize) {
+		static window  = function(_label, _id, _x, _y, _width, _height, _callback, _flags = EImGui_WindowFlags.NoCollapse + EImGui_WindowFlags.NoResize) {
 			imguigml_set_next_window_size(_width, _height);
 			imguigml_set_next_window_pos(_x, _y);
 		
@@ -452,21 +468,52 @@ function UI() constructor {
 			imguigml_end();
 		}
 	#endregion
+	
+	#region COLORS
+		/// @func color_edit(_label, _id, _red, _green, _blue, _on_change, [_flags = 0])
+		/// @param {String} _label Title name of the window
+		/// @param {String} _id This is the ID. Needs to be UNIQUE
+		/// @param {Real} _red Red value between 0 - 1
+		/// @param {Real} _green Green value between 0 - 1
+		/// @param {Real} _blue Blue value between 0 - 1
+		/// @param {Function} _on_change The function to call when something changed
+		/// @param {Real} _flags Flags from EImGui_ColorEditFlags
+		static color_edit = function(_label, _id, _red, _green, _blue, _on_change, _flags = 0) {
+			var ret = imguigml_color_edit3(string(_label) + "###" + string(_id), _red, _green, _blue, _flags);
+			
+			if(ret[0] == 1) {
+				_on_change(ret[1], ret[2], ret[3]);
+			}
+		}
+		
+		/// @func color_edit(_label, _id, _red, _green, _blue, _alpha, _on_change, [_flags = 0])
+		/// @param {String} _label Title name of the window
+		/// @param {String} _id This is the ID. Needs to be UNIQUE
+		/// @param {Real} _red Red value between 0 - 1
+		/// @param {Real} _green Green value between 0 - 1
+		/// @param {Real} _blue Blue value between 0 - 1
+		/// @param {Real} _alpha Alpha value between 0 - 1
+		/// @param {Function} _on_change The function to call when something changed
+		/// @param {Real} _flags Flags from EImGui_ColorEditFlags
+		static color_edit_alpha = function(_label, _id, _red, _green, _blue, _alpha, _on_change, _flags = 0) {
+			var ret = imguigml_color_edit4(string(_label) + "###" + string(_id), _red, _green, _blue, _alpha, _flags);
+			
+			if(ret[0] == 1) {
+				_on_change(ret[1], ret[2], ret[3], ret[4]);
+			}
+		}
+	#endregion
 
 	// @TODO LISTING
 	// imguigml_columns
 
-	// static color_edit_3 = function(_label, _red, _green, _blue, _on_change) {
-	//     var ret = imguigml_color_edit3(_label, _red, _green, _blue);
-    
-	//     if(ret[0] == 1) {
-	//         _on_change(ret[1], ret[2], ret[3]);
-	//     }
-	// }
 
 	 #region Labels
-	     static label = function(_label) {
-	         imguigml_text(_label);
-	     }
+		/// @func label(_string)
+		/// @desc Place a static label
+		/// @param {String} _string The text to draw
+	    static label = function(_string) {
+			imguigml_text(_string);
+	    }
 	 #endregion
 }

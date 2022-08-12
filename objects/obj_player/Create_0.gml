@@ -1,8 +1,5 @@
 /// @description 
 
-collision_layer_id = layer_get_id("ts_Collision");
-collision_tiles = layer_tilemap_get_id(collision_layer_id);
-
 _gravity = 1;
 _jump_height = -14;
 _acceleration = 1;
