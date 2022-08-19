@@ -375,6 +375,21 @@ function UI() constructor {
 			}
 		}
 	#endregion
+	
+	#region SELECT
+		/// @func select(_label, _current, _items, _on_change)
+		/// @param {String} _label Title of select
+		/// @param {Real} _current The current index (from an array) of what the select is
+		/// @param {Array} _items An array of items that the user can select
+		/// @param {Function} _on_change the callback function that will return the index selected
+		static select = function(_label, _current, _items, _on_change) {
+			var ret = imguigml_combo(_label, _current, _items);
+			
+			if(ret[0] == 1) {
+				_on_change(ret[1]);
+			}
+		}
+	#endregion
 
 	#region HELPERS
 	
@@ -486,7 +501,7 @@ function UI() constructor {
 			}
 		}
 		
-		/// @func color_edit(_label, _id, _red, _green, _blue, _alpha, _on_change, [_flags = 0])
+		/// @func color_edit_alpha(_label, _id, _red, _green, _blue, _alpha, _on_change, [_flags = 0])
 		/// @param {String} _label Title name of the window
 		/// @param {String} _id This is the ID. Needs to be UNIQUE
 		/// @param {Real} _red Red value between 0 - 1

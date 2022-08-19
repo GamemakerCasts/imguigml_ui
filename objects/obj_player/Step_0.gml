@@ -30,6 +30,28 @@ if(_is_selected) {
 				speed = _a;
 			}, 0.01);
 			
+			ui.select("Color", draw_color, ["Green", "Blue", "Red", "Black", "White"], function(_a) {
+				var tmp = c_white;
+				// index
+				switch(_a) {
+					case 0:
+						tmp = c_green;
+					break;
+					case 1:
+						tmp = c_blue;
+					break;
+					case 2:
+						tmp = c_red;
+					break;
+					case 3:
+						tmp = c_black;
+					break;
+					default:
+					break;
+				}
+				draw_color = tmp;
+			});
+			
 			ui.button("Pause", "p", function() {
 				speed = 0;
 			}, -1, 32);

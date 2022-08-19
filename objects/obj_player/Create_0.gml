@@ -8,6 +8,7 @@ y = room_height / 2;
 _is_selected = false;
 _window_x = 0;
 _window_y = 0;
+draw_color = c_green;
 
 // initialize the UI for our player
 ui = new UI();
